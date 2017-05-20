@@ -5,7 +5,7 @@ install:
 - go get -u github.com/kardianos/govendor
 - govendor sync
 script:
-- go test ./pkg/...
+# - go test ./pkg/...
 - mkdir -p build
 - for os in linux darwin windows; do GOOS=$os GOARCH=amd64 go build -o build/hiptee.$GOOS.$GOARCH ./cmd/hiptee; done
 - GOOS=linux GOARCH=amd64 go build -o build/hiptee.linux.amd64 ./cmd/hiptee
