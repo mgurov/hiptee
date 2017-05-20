@@ -7,10 +7,10 @@ install:
 script:
 # - go test ./pkg/...
 - mkdir -p build
-- for os in linux darwin windows; do GOOS=$os GOARCH=amd64 go build -o build/hiptee.$GOOS.$GOARCH ./cmd/hiptee; done
-- GOOS=linux GOARCH=amd64 go build -o build/hiptee.linux.amd64 ./cmd/hiptee
-- GOOS=windows GOARCH=amd64 go build -o build/hiptee.windows.amd64 ./cmd/hiptee
-- GOOS=darwin GOARCH=amd64 go build -o build/hiptee.darwin.amd64 ./cmd/hiptee
+- for GOOS in linux darwin windows; do GOARCH=amd64; go build -o build/hiptee.$GOOS.$GOARCH ./cmd/hiptee; done
+#- GOOS=linux GOARCH=amd64 go build -o build/hiptee.linux.amd64 ./cmd/hiptee
+#- GOOS=windows GOARCH=amd64 go build -o build/hiptee.windows.amd64 ./cmd/hiptee
+#- GOOS=darwin GOARCH=amd64 go build -o build/hiptee.darwin.amd64 ./cmd/hiptee
 - ls -lah build
 deploy:
   provider: releases
