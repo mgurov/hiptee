@@ -9,9 +9,13 @@ import (
 	"github.com/spf13/viper"
 	"log"
 	"os"
+	"fmt"
 )
 
 const mainName = "hiptee"
+
+var commit string
+var version string
 
 func main() {
 
@@ -22,10 +26,16 @@ func main() {
 	}
 
 	var config string
+	showVersionAndExit := flag.Bool("version", false, "show version and exit")
 	flag.StringVar(&config, "config", "", "config file. Defaults to HIPTEE_CONFIG environmental variable. Json of contents {\"token\":<token>,\"room\":<room>} expected.")
 	flag.StringVar(&hipchatConfig.token, "token", "", "hipchat token to send notice with. Defaults to HIPCHAT_TOKEN environmental variable.")
 	flag.StringVar(&hipchatConfig.room, "room", "", "hipchat room to send notice to. Defaults to HIPCHAT_ROOM environmental variable.")
 	flag.Parse()
+
+	if *showVersionAndExit {
+		fmt.Println(mainName, "version", version, "commit", commit)
+		return
+	}
 
 	viper.BindFlagValue("hipchat.token", stdFlagAdaptorValue{name: "token", value: &hipchatConfig.token})
 	viper.BindFlagValue("hipchat.room", stdFlagAdaptorValue{name: "room", value: &hipchatConfig.room})
