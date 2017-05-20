@@ -8,7 +8,7 @@ Tee mode is activated when the tool is invoked without extra arguments. In this 
   the hipchat room as grey non-alerting messages, followed by a green "Done" notification (also non-alerting).  
 
 ````bash
-$ echo Hello, World! | go run cmd/hiptee/main.go
+$ echo Hello, World! | hiptee
 Hello, World!
 ````
 
@@ -19,13 +19,17 @@ The stdin is also echoed to the stdout of the hiptee.
 Exec mode is activated when a command to execute is specified:  
 
 ````bash
-go run cmd/hiptee/main.go echo exec mode!
+hiptee echo exec mode!
 exec mode!
 ````
 
 the standard output of the command is treated the same way as the standard input in the tee mode: it is echoed to both 
 standard output of the tool and sent as a grey non-alerting notification to hipchat. Standard error is shown as red alerts
 in the hipchat. Green non-alerting "Done" notification is sent to hipchat upon completion.
+
+### installation 
+
+Download from [github release page](https://github.com/mgurov/hiptee/releases) or see `.travis.yml` for instructions to build (golang) 
   
 ### config
 
