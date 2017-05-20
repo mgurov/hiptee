@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/mgurov/teehip/pkg"
-	"github.com/mgurov/teehip/pkg/std"
+	"github.com/mgurov/hiptee/pkg"
+	"github.com/mgurov/hiptee/pkg/std"
 	"log"
 	"os"
 )

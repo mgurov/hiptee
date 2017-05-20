@@ -3,9 +3,9 @@ package main
 import (
 	"bufio"
 	"flag"
-	"github.com/mgurov/teehip/pkg"
-	"github.com/mgurov/teehip/pkg/hip"
-	"github.com/mgurov/teehip/pkg/std"
+	"github.com/mgurov/hiptee/pkg"
+	"github.com/mgurov/hiptee/pkg/hip"
+	"github.com/mgurov/hiptee/pkg/std"
 	"github.com/spf13/viper"
 	"log"
 	"os"
