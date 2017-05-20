@@ -6,6 +6,7 @@ install:
 - govendor sync
 script:
 - mkdir -p build
+- for GOOS in linux darwin windows; do GOARCH=amd64; echo "-X main.version=$GOOS -X main.commit=$GOARCH"; done
 - for GOOS in linux darwin windows; do GOARCH=amd64; go build -ldflags "-X main.version=$TRAVIS_TAG -X main.commit=$TRAVIS_COMMIT" -o build/hiptee.$GOOS.$GOARCH ./cmd/hiptee; done
 - ls -lah build
 deploy:
