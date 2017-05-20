@@ -3,11 +3,8 @@ package hip
 import (
 	"github.com/tbruyelle/hipchat-go/hipchat"
 
-	"fmt"
 	"github.com/pkg/errors"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"strings"
 	"sync"
 )
@@ -62,16 +59,4 @@ func NewHipchatRoomPrinter(hipchatToken string, roomId string) (*HipchatRoomPrin
 	} else {
 		return &r, nil
 	}
-}
-
-func checkReponseCode(r *http.Response, err error) error {
-	if err != nil {
-		return err
-	}
-	if r.StatusCode/100 != 2 {
-		responseBody, _ := ioutil.ReadAll(r.Body)
-		r.Body.Close()
-		return errors.New(fmt.Sprintf("Unexpected http code %d (%s) %s", r.StatusCode, r.Status, responseBody))
-	}
-	return nil
 }

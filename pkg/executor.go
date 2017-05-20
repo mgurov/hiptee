@@ -8,9 +8,11 @@ import (
 	"sync"
 )
 
-func Execute(command string, params []string, listener LineOutputListener) error {
+func Execute(command string, params []string, listener LineOutputListener, stdin io.Reader) error {
 	cmd := exec.Command(command, params...)
 	wg := sync.WaitGroup{}
+
+	cmd.Stdin = stdin
 
 	if err := listen(listener.Out, cmd.StdoutPipe, &wg); err != nil {
 		log.Fatal(err)

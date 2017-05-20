@@ -27,6 +27,11 @@ the standard output of the command is treated the same way as the standard input
 standard output of the tool and sent as a grey non-alerting notification to hipchat. Standard error is shown as red alerts
 in the hipchat. Green non-alerting "Done" notification is sent to hipchat upon completion.
 
+### controlling from hipchat
+
+when exec mode has "poll" specified, the tool will be polling the target hipchat room for the messages starting with this prefix
+and send them to the standard input of the command executed.
+
 ### installation 
 
 Download from [github release page](https://github.com/mgurov/hiptee/releases) or see `.travis.yml` for instructions to build (golang) 
