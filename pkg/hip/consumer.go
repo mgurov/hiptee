@@ -35,14 +35,13 @@ func (r *HipchatRoomReader) Add(s string) {
 	r.buffer.WriteString(s + "\n")
 }
 
-//NB: isn't thread safe as does the hipchat authtest which affects all hipchat clients
 func NewHipchatRoomReader(hipchatToken string, roomId string, messagePrefix string) (*HipchatRoomReader, error) {
 	client := hipchat.NewClient(hipchatToken)
 
 	history, response, err := client.Room.Latest(roomId, &hipchat.LatestHistoryOptions{MaxResults: 1})
 	err = checkReponseCode(response, err)
 	if err != nil {
-		return nil, errors.Wrap(err, "Failed auth check against the room")
+		return nil, errors.Wrap(err, "hipchat polling err")
 	}
 
 	var lastMessageSeen string
