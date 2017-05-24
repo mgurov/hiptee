@@ -2,9 +2,9 @@ language: go
 go:
 - 1.8.x
 install:
-- go get -u github.com/kardianos/govendor
-- govendor sync
+- make install
 script:
+- make verify
 - mkdir -p build
 - for os in linux darwin windows; do export GOOS=$os; export GOARCH=amd64; go build -ldflags "-X main.version=$TRAVIS_TAG -X main.commit=$TRAVIS_COMMIT" -o build/hiptee.$GOOS.$GOARCH ./cmd/hiptee; done
 deploy:
