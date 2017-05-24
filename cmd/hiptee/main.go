@@ -37,13 +37,13 @@ func main() {
 		return
 	}
 
-	viper.BindFlagValue("hipchat.token", stdFlagAdaptorValue{name: "token", value: &hipchatToken})
-	viper.BindFlagValue("hipchat.room", stdFlagAdaptorValue{name: "room", value: &hipchatRoom})
-	viper.BindFlagValue("hipchat.poll_prefix", stdFlagAdaptorValue{name: "room", value: &hipchatPollPrefix})
+	must(viper.BindFlagValue("hipchat.token", stdFlagAdaptorValue{name: "token", value: &hipchatToken}))
+	must(viper.BindFlagValue("hipchat.room", stdFlagAdaptorValue{name: "room", value: &hipchatRoom}))
+	must(viper.BindFlagValue("hipchat.poll_prefix", stdFlagAdaptorValue{name: "room", value: &hipchatPollPrefix}))
 
-	viper.BindEnv("hipchat.token", "HIPCHAT_TOKEN")
-	viper.BindEnv("hipchat.room", "HIPCHAT_ROOM")
-	viper.BindEnv("hipchat.poll_prefix", "HIPCHAT_POLL_PREFIX")
+	must(viper.BindEnv("hipchat.token", "HIPCHAT_TOKEN"))
+	must(viper.BindEnv("hipchat.room", "HIPCHAT_ROOM"))
+	must(viper.BindEnv("hipchat.poll_prefix", "HIPCHAT_POLL_PREFIX"))
 	readViperConfig(config)
 
 	if hipchatToken = viper.GetString("hipchat.token"); "" == hipchatToken {
@@ -90,6 +90,12 @@ func main() {
 		if err := pkg.Execute(command, params, hipchatAndStdout, inCommandsReader); nil != err {
 			os.Exit(1)
 		}
+	}
+}
+
+func must(err error) {
+	if nil != err {
+		log.Fatal(err)
 	}
 }
 
